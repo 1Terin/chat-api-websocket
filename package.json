@@ -1,0 +1,25 @@
+{
+  "name": "chat-api-sam",
+  "version": "1.0.0",
+  "description": "Serverless Chat API with AWS SAM and TypeScript",
+  "scripts": {
+    "build": "sam build --cached --parallel",
+    "deploy": "sam deploy --guided",
+    "remove": "sam delete --confirm",
+    "start-api": "sam local start-api",
+    "test": "echo \"No tests specified\""
+  },
+  "devDependencies": {
+    "@aws-sdk/client-apigatewaymanagementapi": "^3.840.0",
+    "@aws-sdk/client-dynamodb": "^3.587.0",
+    "@aws-sdk/util-dynamodb": "^3.587.0",
+    "@types/aws-lambda": "^8.10.138",
+    "@types/node": "^20.14.2",
+    "aws-cdk": "^2.144.0",
+    "esbuild": "^0.21.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@aws-sdk/lib-dynamodb": "^3.840.0"
+  }
+}
