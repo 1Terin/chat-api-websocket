@@ -17,14 +17,14 @@ export const handler: (event: APIGatewayProxyWebsocketEventV2) => Promise<APIGat
         return { statusCode: 400, body: "Missing connectionId or request body." };
     }
 
-    let parsedBody: { groupId?: string; message: string };
+    let parsedBody: { groupId?: string; message?: string; senderName?: string } = {};
     try {
         parsedBody = JSON.parse(event.body);
     } catch (error) {
         return { statusCode: 400, body: "Invalid JSON in request body." };
     }
 
-    const { groupId, message } = parsedBody;
+    const { groupId, message, senderName } = parsedBody;
     if (!message) {
         return { statusCode: 400, body: "Missing 'message' in request body." };
     }
@@ -50,7 +50,7 @@ export const handler: (event: APIGatewayProxyWebsocketEventV2) => Promise<APIGat
             return sendMessageToClient(apiGatewayClient, connection.connectionId, {
                 type: "message",
                 groupId: groupId || "broadcast",
-                senderId: connectionId,
+                senderId: senderName || connectionId,
                 message: message,
                 timestamp: Date.now(),
             });
